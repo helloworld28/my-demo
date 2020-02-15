@@ -34,6 +34,13 @@ public class DigitConverterTest {
     }
 
     @Test
+    void testConvertWithNull() {
+        List<String> list = new DigitConverter().convert(null);
+        String actual = list.stream().collect(Collectors.joining(" "));
+        Assert.assertEquals(actual, "");
+    }
+
+    @Test
     void testLetterCombineWith0To99() {
         List<String> list = new DigitConverter().convert(new Integer[]{23});
         String actual = list.stream().collect(Collectors.joining(" "));

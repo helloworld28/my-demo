@@ -31,10 +31,15 @@ public class DigitConverter {
      * 转换方法
      * 1.先把整型数组转为与字符串
      * 2.再进行转换
+     *
      * @param digits 整型数组（0-99）
      * @return List<String> 所有组合
      */
     List<String> convert(Integer[] digits) {
+        if (digits == null || digits.length == 0) {
+            return Collections.EMPTY_LIST;
+        }
+
         List<String> resultList = new ArrayList<>();
 
         //1.转成字符串
@@ -55,9 +60,10 @@ public class DigitConverter {
 
     /**
      * 实际转换方法
-     * @param combinationStr 组合字母
+     *
+     * @param combinationStr  组合字母
      * @param remainingDigits 剩余数字
-     * @param resultList 结果组合列表
+     * @param resultList      结果组合列表
      */
     void doConvert(String combinationStr, String remainingDigits, List<String> resultList) {
         if (remainingDigits.length() == 0) {
