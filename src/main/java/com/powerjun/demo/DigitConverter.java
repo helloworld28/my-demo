@@ -1,9 +1,9 @@
 package com.powerjun.demo;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
+
+import static java.util.stream.Collectors.joining;
 
 /**
  * 数字转换器
@@ -15,35 +15,64 @@ import java.util.Map;
  * Created by Administrator on 2020/2/13.
  */
 public class DigitConverter {
-    Map<Integer, String> letterMap = new HashMap<Integer, String>() {{
-        put(2, "abc");
-        put(3, "def");
-        put(4, "ghi");
-        put(5, "jkl");
-        put(6, "mno");
-        put(7, "pqrs");
-        put(8, "tuv");
-        put(9, "wxyz");
+    Map<Character, String> letterMap = new HashMap<Character, String>() {{
+        put('2', "abc");
+        put('3', "def");
+        put('4', "ghi");
+        put('5', "jkl");
+        put('6', "mno");
+        put('7', "pqrs");
+        put('8', "tuv");
+        put('9', "wxyz");
     }};
 
 
-    List<String> convert(int[] digits) {
-        List<String> result = new ArrayList<>();
-        doConvert("", digits, result, 0);
-        return result;
+    /**
+     * 转换方法
+     * 1.先把整型数组转为与字符串
+     * 2.再进行转换
+     * @param digits 整型数组（0-99）
+     * @return List<String> 所有组合
+     */
+    List<String> convert(Integer[] digits) {
+        List<String> resultList = new ArrayList<>();
+
+        //1.转成字符串
+        String digitsStr = transferToStr(digits);
+
+        //2.进行转换
+        doConvert("", digitsStr, resultList);
+
+        return resultList;
     }
 
-    void doConvert(String combinationStr, int[] digits, List<String> resultList, int index) {
-        if (index == digits.length) {
+    private String transferToStr(Integer[] digits) {
+        return Arrays.asList(digits)
+                .stream()
+                .map(String::valueOf)
+                .collect(joining());
+    }
+
+    /**
+     * 实际转换方法
+     * @param combinationStr 组合字母
+     * @param remainingDigits 剩余数字
+     * @param resultList 结果组合列表
+     */
+    void doConvert(String combinationStr, String remainingDigits, List<String> resultList) {
+        if (remainingDigits.length() == 0) {
             resultList.add(combinationStr);
         } else {
-            String letters = letterMap.get(digits[index]);
-            index++;
+            String letters = letterMap.get((Character) remainingDigits.charAt(0));
+            remainingDigits = remainingDigits.substring(1);
             if (letters == null) {
-                doConvert(combinationStr, digits, resultList, index);
+                //当前数字不存在字母则直接拼接后面的
+                doConvert(combinationStr, remainingDigits, resultList);
             } else {
+                //迭代当前数字所有的字母
                 for (int j = 0; j < letters.length(); j++) {
-                    doConvert(combinationStr + letters.charAt(j), digits, resultList, index);
+                    //递归的方式来拼接后面出现的字字符串
+                    doConvert(combinationStr + letters.charAt(j), remainingDigits, resultList);
                 }
             }
         }
