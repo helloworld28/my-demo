@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 /**
  * Created by Administrator on 2020/2/13.
  */
-public class LetterConverterTest {
+public class DigitConverterTest {
 
     @Test
     void testConvertWithTwoNormalNum() {
