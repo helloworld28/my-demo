@@ -11,6 +11,21 @@ import static java.util.stream.Collectors.joining;
  * combinations that the numbers could represent. A mapping of digit to letters (just like
  * on the telephone buttons) is being followed. Note that 0 and 1 do not map to any
  * letters. All the mapping are shown in the image below:
+ *         put('2', "abc");
+ *         put('3', "def");
+ *         put('4', "ghi");
+ *         put('5', "jkl");
+ *         put('6', "mno");
+ *         put('7', "pqrs");
+ *         put('8', "tuv");
+ *         put('9', "wxyz");
+ *
+ * Example:
+ * Input: arr[] = {2, 3}
+ * Output: ad ae af bd be bf cd ce cf
+ * Input: arr[] = {9}
+ * Output: w x y z
+ *
  * <p>
  * Created by Administrator on 2020/2/13.
  */
