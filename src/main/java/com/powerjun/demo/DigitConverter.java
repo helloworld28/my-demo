@@ -15,7 +15,7 @@ import static java.util.stream.Collectors.joining;
  * Created by Administrator on 2020/2/13.
  */
 public class DigitConverter {
-    Map<Character, String> letterMap = new HashMap<Character, String>() {{
+    private Map<Character, String> letterMap = new HashMap<Character, String>() {{
         put('2', "abc");
         put('3', "def");
         put('4', "ghi");
@@ -52,8 +52,7 @@ public class DigitConverter {
     }
 
     private String transferToStr(Integer[] digits) {
-        return Arrays.asList(digits)
-                .stream()
+        return Arrays.stream(digits)
                 .map(String::valueOf)
                 .collect(joining());
     }
@@ -65,7 +64,7 @@ public class DigitConverter {
      * @param remainingDigits 剩余数字
      * @param resultList      结果组合列表
      */
-    void doConvert(String combinationStr, String remainingDigits, List<String> resultList) {
+    private void doConvert(String combinationStr, String remainingDigits, List<String> resultList) {
         if (remainingDigits.length() == 0) {
             resultList.add(combinationStr);
         } else {
